@@ -13,7 +13,7 @@ const destDir = jetpack.cwd('./app');
 
 gulp.task('bundle', () => {
   return Promise.all([
-    bundle(srcDir.path('background.js'), destDir.path('background.js')),
+    // bundle(srcDir.path('background.js'), destDir.path('background.js')),
     bundle(srcDir.path('app.js'), destDir.path('app.js')),
   ]);
 });
@@ -40,9 +40,9 @@ gulp.task('watch', () => {
     };
   };
 
-  watch('src/**/*.js', batch((events, done) => {
-    gulp.start('bundle', beepOnError(done));
-  }));
+  // watch('src/**/*.js', batch((events, done) => {
+  //   gulp.start('bundle', beepOnError(done));
+  // }));
   watch('src/**/*.less', batch((events, done) => {
     gulp.start('less', beepOnError(done));
   }));
