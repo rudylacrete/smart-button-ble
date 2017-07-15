@@ -10,7 +10,7 @@ import { devMenuTemplate } from './menu/dev_menu_template';
 import { editMenuTemplate } from './menu/edit_menu_template';
 import createWindow from './helpers/window';
 
-import '../lib/puckJs.js';
+import bleApiInit from './core/bleApi.js';
 
 // Special module holding environment variables which you declared
 // in config/env_xxx.json file.
@@ -49,17 +49,10 @@ app.on('ready', () => {
   if (env.name === 'development') {
     mainWindow.openDevTools();
   }
+
+  bleApiInit(mainWindow.webContents);
 });
 
 app.on('window-all-closed', () => {
   app.quit();
 });
-
-
-// const puckJs = new PuckJs();
-
-// puckJs.on('discover', function(peripherical) {
-//   console.log('new device ....>', peripherical);
-// });
-// puckJs.startScan();
-
