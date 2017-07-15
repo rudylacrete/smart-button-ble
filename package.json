@@ -1,0 +1,19 @@
+{
+  "name": "smart-button-ble",
+  "version": "0.0.1",
+  "description": "Simple electron application which aims to control and set a BLE button (puckJs)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "BLE",
+    "noble",
+    "puckJs",
+    "espruino",
+    "react",
+    "electron"
+  ],
+  "author": "rudylacrete, panArnaud",
+  "license": "MIT"
+}
