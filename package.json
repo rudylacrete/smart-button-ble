@@ -15,5 +15,8 @@
     "electron"
   ],
   "author": "rudylacrete, panArnaud",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "noble": "^1.8.1"
+  }
 }
