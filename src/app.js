@@ -30,7 +30,3 @@ const osMap = {
 window.onload = function(){
   ReactDOM.render(<ScanButton />, document.getElementById('app'));
 }
-
-ipcRenderer.on('new-device', function(event, device) {
-	console.log(event, device);
-});
