@@ -10,7 +10,7 @@ import jetpack from 'fs-jetpack';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Home from './ui/containers/Home.jsx';
+import ScanButton from './ui/components/ScanButton.jsx';
 
 import env from './env';
 
@@ -28,16 +28,9 @@ const osMap = {
 };
 
 window.onload = function(){
-  ReactDOM.render(<Home />, document.getElementById('app'));
+  ReactDOM.render(<ScanButton />, document.getElementById('app'));
 }
 
 ipcRenderer.on('new-device', function(event, device) {
 	console.log(event, device);
 });
-
-setTimeout(function() {
-	if(ipcRenderer.sendSync('start-scan'))
-		console.log('scan activated successfuly!');
-	else
-		console.log('error on scan start');
-}, 2000);
