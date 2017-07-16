@@ -5,7 +5,7 @@ import './helpers/context_menu.js';
 import './helpers/external_links.js';
 
 // All stuff below is just to show you how it works. You can delete all of it.
-import { remote, ipcRenderer } from 'electron';
+import { remote } from 'electron';
 import jetpack from 'fs-jetpack';
 import { greet } from './hello_world/hello_world';
 import env from './env';
@@ -28,14 +28,3 @@ document.querySelector('#os').innerHTML = osMap[process.platform];
 document.querySelector('#author').innerHTML = manifest.author;
 document.querySelector('#env').innerHTML = env.name;
 document.querySelector('#electron-version').innerHTML = process.versions.electron;
-
-ipcRenderer.on('new-device', function(event, device) {
-	console.log(event, device);
-});
-
-setTimeout(function() {
-	if(ipcRenderer.sendSync('start-scan'))
-		console.log('scan activated successfuly!');
-	else
-		console.log('error on scan start');
-}, 2000);
