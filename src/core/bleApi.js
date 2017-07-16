@@ -28,6 +28,7 @@ const _init = (webContents) => {
   });
 
   ipcMain.on('connect', function(event, deviceUuid) {
+    console.log(`Connecting to: ${deviceUuid}`);
     puckJs.connect(deviceUuid).then(() => event.sender.send(`${deviceUuid}-connection`, true))
     .catch((error) => event.sender.send(`${deviceUuid}-connection`, error));
   });

@@ -18,10 +18,16 @@ export default class List extends React.Component {
   	ipcRenderer.on('new-device', (event, device) => {
       this.setState({ devices : [...this.state.devices, device ]});
 		});
+		// ipcRenderer.on('btn-pressed', () => {
+  //   	console.log("Button pressed");
+  //   });
   }
   connectDevice(deviceUuid) {
-  	ipcRenderer.once(deviceUuid.'connect');
-  	ipcRenderer.sendSync('connect');
+  	ipcRenderer.once(deviceUuid + '-connection', (event, res) => {
+  		// ipcRenderer.send('set-led-color', {blue: true});
+  		console.log("test");
+  	});
+  	ipcRenderer.send('connect', deviceUuid);
   }
   render() {
   	let devices = this.state.devices; 
