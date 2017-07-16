@@ -15,6 +15,11 @@ const _init = (webContents) => {
     puckJs.startScan();
     event.returnValue = true;
   });
+
+  ipcMain.on('stop-scan', function(event) {
+    puckJs.stopScan();
+    event.returnValue = true;
+  });
 }
 
 export default (webContents) => {
