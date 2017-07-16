@@ -20,6 +20,11 @@ const _init = (webContents) => {
     puckJs.stopScan();
     event.returnValue = true;
   });
+
+  ipcMain.on('connect', function(event, deviceUuid) {
+    puckJs.connect(deviceUuid).then(() => event.sender.send(`${deviceUuid}-connection`, true))
+    .catch((error) => event.sender.send(`${deviceUuid}-connection`, false));
+  });
 }
 
 export default (webContents) => {
