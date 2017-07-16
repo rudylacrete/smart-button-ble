@@ -10,7 +10,7 @@ export default class List extends React.Component {
 		};
 	}
   componentWillReceiveProps(nextProps) {
-  	if(this.props.isScanning != nextProps.isScanning) {
+  	if(this.props.isScanning != nextProps.isScanning && nextProps.isScanning == true) {
 			this.setState({devices : []});
   	}
   }
@@ -19,13 +19,17 @@ export default class List extends React.Component {
       this.setState({ devices : [...this.state.devices, device ]});
 		});
   }
+  connectDevice(deviceUuid) {
+  	ipcRenderer.once(deviceUuid.'connect');
+  	ipcRenderer.sendSync('connect');
+  }
   render() {
   	let devices = this.state.devices; 
   	return (
 	  	devices && 
 	  	<ul>
 	  		{ devices.map((device) => {
-	  			return <li key= { device.uuid }>{ device.advertisement.localName }</li>
+	  			return <li key= { device.uuid }>{ device.advertisement.localName } <button onClick={() => this.connectDevice(device.uuid)}>Connect</button></li>
 	  		})}
 	  	</ul>
   	);
