@@ -1,13 +1,16 @@
-import { remote, ipcRenderer } from 'electron';
 import React from 'react';
 import List from './List.jsx';
+import LedColor from './LedColor.jsx';
 
 import puckJs from '../../../lib/puckJs.js';
 
 export default class ScanButton extends React.Component {
   constructor(props) {
   	super(props);
-    this.state = { isScanning : false };
+    this.state = {
+      isScanning : false,
+      isConnected: false
+    };
 
   	this.handleClick = this.handleClick.bind(this);
   }
@@ -23,11 +26,16 @@ export default class ScanButton extends React.Component {
       }
     }
   }
+  setConnectedState(isConnected) {
+    this.setState(Object.assign({}, this.state, {isConnected}));
+  }
   render() {
+    let setConnected = this.setConnectedState.bind(this);
     return (
       <div>
         <button id="scanButton" onClick={this.handleClick}>{ this.state.isScanning ? "Stop" : "Scan" }</button>
-        <List isScanning={ this.state.isScanning } />
+        <List isScanning={ this.state.isScanning } setConnected={setConnected} />
+        <LedColor connected={ this.state.isConnected } />
       </div>
     );
   }

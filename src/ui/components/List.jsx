@@ -21,14 +21,10 @@ export default class List extends React.Component {
       console.log(device);
       this.setState({ devices : [...this.state.devices, device ]});
     });
-    puckJs.on('btn-pressed', () => {
-      console.log("Button pressed");
-    });
   }
   connectDevice(deviceUuid) {
     puckJs.connect(deviceUuid).then(() => {
-      // ipcRenderer.send('set-led-color', {blue: true});
-      alert('connect OK');
+      this.props.setConnected(true);
     }).catch(() => alert('connect failed'));
   }
   render() {
