@@ -1,11 +1,8 @@
 import { ipcMain } from 'electron';
-import PuckJs from '../../lib/puckJs.js';
+import puckJs from '../../lib/puckJs.js';
 import { app } from 'electron';
 
-const puckJs = new PuckJs();
-
 const _init = (webContents) => {
-
 
   puckJs.on('discover', function(peripherical) {
     console.log('new device ....>', peripherical);
@@ -45,7 +42,3 @@ export default (webContents) => {
   // wait for the view to be ready
   webContents.on('did-finish-load', _init.bind(null, webContents));
 }
-
-app.on('will-quit', () => {
-  puckJs.disconnect();
-});

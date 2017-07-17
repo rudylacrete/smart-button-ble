@@ -1,6 +1,8 @@
 import { remote, ipcRenderer } from 'electron';
 import React from 'react';
 
+import puckJs from '../../../lib/puckJs.js';
+
 export default class List extends React.Component {
   constructor(props) {
     super(props);
@@ -15,19 +17,19 @@ export default class List extends React.Component {
     }
   }
   componentDidMount() {
-    ipcRenderer.on('new-device', (event, device) => {
+    puckJs.on('discover', (device) => {
+      console.log(device);
       this.setState({ devices : [...this.state.devices, device ]});
     });
-    ipcRenderer.on('btn-pressed', () => {
+    puckJs.on('btn-pressed', () => {
       console.log("Button pressed");
     });
   }
   connectDevice(deviceUuid) {
-    ipcRenderer.once(deviceUuid + '-connection', (event, res) => {
+    puckJs.connect(deviceUuid).then(() => {
       // ipcRenderer.send('set-led-color', {blue: true});
-      console.log("connect done", res);
-    });
-    ipcRenderer.send('connect', deviceUuid);
+      alert('connect OK');
+    }).catch(() => alert('connect failed'));
   }
   render() {
     let devices = this.state.devices; 

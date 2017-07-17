@@ -2,6 +2,8 @@ import { remote, ipcRenderer } from 'electron';
 import React from 'react';
 import List from './List.jsx';
 
+import puckJs from '../../../lib/puckJs.js';
+
 export default class ScanButton extends React.Component {
   constructor(props) {
   	super(props);
@@ -11,9 +13,16 @@ export default class ScanButton extends React.Component {
   }
   handleClick() {
     this.setState({ isScanning : !this.state.isScanning } );
-    const actionName = !this.state.isScanning ? 'start-scan' : 'stop-scan';
-    let res = ipcRenderer.sendSync(actionName);
-  }	
+    if(!this.state.isScanning)
+      puckJs.startScan();
+    else {
+      try {
+        puckJs.stopScan();
+      } catch(e) {
+        console.log('scan was probably already deactivated');
+      }
+    }
+  }
   render() {
     return (
       <div>

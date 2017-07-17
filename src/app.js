@@ -14,6 +14,8 @@ import ScanButton from './ui/components/ScanButton.jsx';
 
 import env from './env';
 
+import puckJs from '../lib/puckJs.js';
+
 const app = remote.app;
 const appDir = jetpack.cwd(app.getAppPath());
 
@@ -30,3 +32,7 @@ const osMap = {
 window.onload = function(){
   ReactDOM.render(<ScanButton />, document.getElementById('app'));
 }
+
+window.addEventListener('unload', () => {
+  puckJs.disconnect();
+});
